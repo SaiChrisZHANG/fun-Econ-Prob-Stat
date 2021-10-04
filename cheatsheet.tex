@@ -1,4 +1,4 @@
-\documentclass[7pt]{article}
+\documentclass{article}
 \usepackage[landscape]{geometry}
 \usepackage{url}
 \usepackage{multicol}
@@ -100,7 +100,7 @@
     Events $E_1,E_2,\cdots$ are just sets. They also follow the algebras of sets, such as:
     
     \tiny{
-    	\begin{tabular}{lp{4cm} l}
+    	\begin{tabular}{ll}
         $A\cup (B\cap C)=(A\cup B)\cap (A\cup C)$ &$A\cap (B\cup C)=(A\cap B)\cup (A\cap C)$ \\
         $A\cup A^C=U$ & $ A\setminus B=A\cap B^C$ \\
         $(\bigcup_{i=1}^{\infty}A_i)^C=\bigcap_{i=1}^{\infty}A_i^C$ & $(\bigcap_{i=1}^{\infty}A_i)^C=\bigcup_{i=1}^{\infty}A_i^C$ \\
@@ -154,26 +154,6 @@
 };
 %------------ Variation of Parameters Header ---------------------
 \node[fancytitle, right=10pt] at (box.north west) {Variation of Parameters};
-\end{tikzpicture}
-
-%------------ ODE Content ---------------
-\begin{tikzpicture}
-\node [mybox] (box){%
-    \begin{minipage}{0.3\textwidth}
-    \small{
-    	\begin{tabular}{lp{4cm} l}
-		\textit{1st Order Linear} & Use integrating factor,
-        \\ & $I = e^{\int P(x) dx}$ \\ \hline
-		\textit{Separable:} & $ \int P(y) dy/dx = \int Q(x) $ \\ \hline
-		\textit{HomogEnEous:} & $ dy/dx = f(x,y) = f(xt,yt) $ \\ &
-        sub $ y = xV $ solve, then sub $ V = y/x $ \\ \hline
-        \textit{Exact:} & If $ M(x,y) + N(x,y)dy/dx = 0 $ and $ M_y = N_x $ i.e. $ \langle M,N \rangle = \nabla F $ then $ \int_x M + \int_y N = F $ \\ \hline
-		\textit{3) Distinct complex roots} &$y=B_1x^a \cos (b \ln x) + B_2x^a\sin (b \ln x)$
-	\end{tabular}}
-    \end{minipage}
-};
-%------------ ODE Header ---------------------
-\node[fancytitle, right=10pt] at (box.north west) {ODEs};
 \end{tikzpicture}
 
 %------------ Series Solution Content ---------------
