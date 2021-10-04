@@ -99,12 +99,13 @@
     \begin{minipage}{0.3\textwidth}
     Events $E_1,E_2,\cdots$ are just sets. They also follow the algebras of sets, such as:
     
-    \tiny{
+    \scriptsize{
     	\begin{tabular}{ll}
-        $A\cup (B\cap C)=(A\cup B)\cap (A\cup C)$ &$A\cap (B\cup C)=(A\cap B)\cup (A\cap C)$ \\
+        $A\cup (B\cap C)=(A\cup B)\cap (A\cup C)$ \\
+        $A\cap (B\cup C)=(A\cap B)\cup (A\cap C)$ \\
         $A\cup A^C=U$ & $ A\setminus B=A\cap B^C$ \\
         $(\bigcup_{i=1}^{\infty}A_i)^C=\bigcap_{i=1}^{\infty}A_i^C$ & $(\bigcap_{i=1}^{\infty}A_i)^C=\bigcup_{i=1}^{\infty}A_i^C$ \\
-        $(A^C)^C=A$ & $A\cup B=U,A\cap B=\varnothing\Leftrightarrow B=A^C$ \\
+        $A\cup B=U,A\cap B=\varnothing\Leftrightarrow B=A^C$ &$(A^C)^C=A$ \\
         \multicolumn{2}{l}{$A\subseteq B\Leftrightarrow A\cap B=A\Leftrightarrow A\cup B=B\Leftrightarrow A\setminus B=\varnothing \Leftrightarrow B^C\subseteq A^C$} 
         \end{tabular}}
     \normalsize
@@ -137,6 +138,7 @@
 %------------ sigma field (Lec1) ---------------------
 \node[fancytitle, right=10pt] at (box.north west) {$\sigma-$field and Borel $\sigma-$field};
 \end{tikzpicture}
+
 %------------ Variation of Parameters Content ---------------------
 \begin{tikzpicture}
 \node [mybox] (box){%
@@ -154,26 +156,6 @@
 };
 %------------ Variation of Parameters Header ---------------------
 \node[fancytitle, right=10pt] at (box.north west) {Variation of Parameters};
-\end{tikzpicture}
-
-%------------ Series Solution Content ---------------
-\begin{tikzpicture}
-\node [mybox] (box){%
-    \begin{minipage}{0.3\textwidth}
-    $y'' + p(x)y' + q(x)y = 0$ \\
-    Useful when $p(x), q(x)$ not constant \\
-    Guess $y = \sum_{n=0}^{\infty}a_n(x-x_0)^n$
-    \small{
-    	\begin{tabular}{lp{4cm} l}
-        \hline
-        $e^x$ & $\sum_{n=0}^{\infty} x^n/{n!}$ \\ \hline
-        $\sin x$ & $\sum_{n=0}^{\infty} \frac{(-1)^n}{(2n+1)!}x^{2n+1}$ \\ \hline
-        $\cos x$ & $\sum_{n=0}^{\infty} \frac{(-1)^n}{(2n)!}x^{2n}$ \\
-	\end{tabular}}
-    \end{minipage}
-};
-%------------ Series Solution Header ---------------------
-\node[fancytitle, right=10pt] at (box.north west) {Series Solution};
 \end{tikzpicture}
 
 %------------ Systems of ODE Content ---------------
@@ -214,12 +196,12 @@
 %------------ Spring-Mass Header ---------------------
 \node[fancytitle, right=10pt] at (box.north west) {Matrix Exponentiation};
 \end{tikzpicture}
-\
+
 %------------ Laplace Transforms Content ---------------
 \begin{tikzpicture}
 \node [mybox] (box){%
     \begin{minipage}{0.3\textwidth}
-    $L[f](s) = \int_0^{\infty} e^{-sx}f(x)dx $\\
+    $$L[f](s) = \int_0^{\infty} e^{-sx}f(x)dx $$
     
     \small{
     	\begin{tabular}{lp{4cm} l}
