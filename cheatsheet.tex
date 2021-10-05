@@ -1,15 +1,24 @@
-\documentclass{article}
-\usepackage[landscape]{geometry}
-\usepackage{url}
+\documentclass[10pt,landscape,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{tikz}
+\usetikzlibrary{shapes,positioning,arrows,fit,calc,graphs,graphs.standard}
+\usepackage[nosf]{kpfonts}
+\usepackage[t1]{sourcesanspro}
+%\usepackage[lf]{MyriadPro}
+%\usepackage[lf,minionint]{MinionPro}
 \usepackage{multicol}
-\usepackage{enumitem}
-\usepackage{amsmath}
+\usepackage{wrapfig}
+\usepackage[top=2mm,bottom=2mm,left=2mm,right=1mm]{geometry}
+\usepackage[framemethod=tikz]{mdframed}
+\usepackage{microtype}
+\usepackage{hyperref}
+
+\usepackage{url}
 \usepackage{multirow}
 \usepackage{esint}
 \usepackage{amsfonts}
-\usepackage{tikz}
 \usetikzlibrary{decorations.pathmorphing}
-\usepackage{amsmath,amssymb}
 
 \usepackage{colortbl}
 \usepackage{xcolor}
@@ -18,269 +27,307 @@
 \usepackage{enumitem}
 \makeatletter
 
+\let\bar\overline
+
+\setlist[itemize]{topsep=0pt,leftmargin=15pt,itemsep=-0.2em}
+\definecolor{myblue}{cmyk}{1,.72,0,.38}
+\definecolor{mypurple}{cmyk}{.57,1,0,.58}
+\definecolor{myred}{cmyk}{0,.88,.88,.58}
+\definecolor{mygreen}{cmyk}{1,0,.69,.66}
+\definecolor{myorange}{cmyk}{0,.58,100,.20}
+
+\def\firstcircle{(0,0) circle (1.5cm)}
+\def\secondcircle{(0:2cm) circle (1.5cm)}
+
+\pgfdeclarelayer{background}
+\pgfsetlayers{background,main}
+
+\renewcommand{\baselinestretch}{.8}
+\pagestyle{empty}
+
+\global\mdfdefinestyle{header}{%
+linecolor=gray,linewidth=1pt,%
+leftmargin=0mm,rightmargin=0mm,skipbelow=0mm,skipabove=0mm,
+}
+
+%\newcommand{\header}{
+%\begin{mdframed}[style=header]
+%\footnotesize
+%\sffamily
+%Cheat sheet\\
+%by~Your~Name,~page~\thepage~of~2
+%\end{mdframed}
+%}
+
+\makeatletter
+\renewcommand{\section}{\@startsection{section}{1}{0mm}{1ex}{.2ex}{\normalsize\bfseries}}
+\renewcommand{\subsection}{\@startsection{subsection}{1}{0mm}{.2ex}{.2ex}{\bfseries}}
+
 \newcommand*\bigcdot{\mathpalette\bigcdot@{.5}}
 \newcommand*\bigcdot@[2]{\mathbin{\vcenter{\hbox{\scalebox{#2}{$\m@th#1\bullet$}}}}}
 \makeatother
 
-\title{130 Cheat Sheet}
-\usepackage[brazilian]{babel}
-\usepackage[utf8]{inputenc}
+\def\multi@column@out{%
+   \ifnum\outputpenalty <-\@M
+   \speci@ls \else
+   \ifvoid\colbreak@box\else
+     \mult@info\@ne{Re-adding forced
+               break(s) for splitting}%
+     \setbox\@cclv\vbox{%
+        \unvbox\colbreak@box
+        \penalty-\@Mv\unvbox\@cclv}%
+   \fi
+   \splittopskip\topskip
+   \splitmaxdepth\maxdepth
+   \dimen@\@colroom
+   \divide\skip\footins\col@number
+   \ifvoid\footins \else
+      \leave@mult@footins
+   \fi
+   \let\ifshr@kingsaved\ifshr@king
+   \ifvbox \@kludgeins
+     \advance \dimen@ -\ht\@kludgeins
+     \ifdim \wd\@kludgeins>\z@
+        \shr@nkingtrue
+     \fi
+   \fi
+   \process@cols\mult@gfirstbox{%
+%%%%% START CHANGE
+\ifnum\count@=\numexpr\mult@rightbox+2\relax
+          \setbox\count@\vsplit\@cclv to \dimexpr \dimen@-1cm\relax
+\setbox\count@\vbox to \dimen@{\vbox to 1cm{\header}\unvbox\count@\vss}%
+\else
+      \setbox\count@\vsplit\@cclv to \dimen@
+\fi
+%%%%% END CHANGE
+            \set@keptmarks
+            \setbox\count@
+                 \vbox to\dimen@
+                  {\unvbox\count@
+                   \remove@discardable@items
+                   \ifshr@nking\vfill\fi}%
+           }%
+   \setbox\mult@rightbox
+       \vsplit\@cclv to\dimen@
+   \set@keptmarks
+   \setbox\mult@rightbox\vbox to\dimen@
+          {\unvbox\mult@rightbox
+           \remove@discardable@items
+           \ifshr@nking\vfill\fi}%
+   \let\ifshr@king\ifshr@kingsaved
+   \ifvoid\@cclv \else
+       \unvbox\@cclv
+       \ifnum\outputpenalty=\@M
+       \else
+          \penalty\outputpenalty
+       \fi
+       \ifvoid\footins\else
+         \PackageWarning{multicol}%
+          {I moved some lines to
+           the next page.\MessageBreak
+           Footnotes on page
+           \thepage\space might be wrong}%
+       \fi
+       \ifnum \c@tracingmulticols>\thr@@
+                    \hrule\allowbreak \fi
+   \fi
+   \ifx\@empty\kept@firstmark
+      \let\firstmark\kept@topmark
+      \let\botmark\kept@topmark
+   \else
+      \let\firstmark\kept@firstmark
+      \let\botmark\kept@botmark
+   \fi
+   \let\topmark\kept@topmark
+   \mult@info\tw@
+        {Use kept top mark:\MessageBreak
+          \meaning\kept@topmark
+         \MessageBreak
+         Use kept first mark:\MessageBreak
+          \meaning\kept@firstmark
+        \MessageBreak
+         Use kept bot mark:\MessageBreak
+          \meaning\kept@botmark
+        \MessageBreak
+         Produce first mark:\MessageBreak
+          \meaning\firstmark
+        \MessageBreak
+        Produce bot mark:\MessageBreak
+          \meaning\botmark
+         \@gobbletwo}%
+   \setbox\@cclv\vbox{\unvbox\partial@page
+                      \page@sofar}%
+   \@makecol\@outputpage
+     \global\let\kept@topmark\botmark
+     \global\let\kept@firstmark\@empty
+     \global\let\kept@botmark\@empty
+     \mult@info\tw@
+        {(Re)Init top mark:\MessageBreak
+         \meaning\kept@topmark
+         \@gobbletwo}%
+   \global\@colroom\@colht
+   \global \@mparbottom \z@
+   \process@deferreds
+   \@whilesw\if@fcolmade\fi{\@outputpage
+      \global\@colroom\@colht
+      \process@deferreds}%
+   \mult@info\@ne
+     {Colroom:\MessageBreak
+      \the\@colht\space
+              after float space removed
+              = \the\@colroom \@gobble}%
+    \set@mult@vsize \global
+  \fi}
 
-\advance\topmargin-.8in
-\advance\textheight3in
-\advance\textwidth3in
-\advance\oddsidemargin-1.5in
-\advance\evensidemargin-1.5in
-\parindent0pt
-\parskip2pt
-\newcommand{\hr}{\centerline{\rule{3.5in}{1pt}}}
-%\colorbox[HTML]{e4e4e4}{\makebox[\textwidth-2\fboxsep][l]{texto}
-\begin{document}
-
-\begin{center}{\huge{\textbf{Probability and Statistics for Economics Cheatsheet}}}\\
-\end{center}
-\begin{multicols*}{3}
-
-\tikzstyle{mybox} = [draw=black, fill=white, very thick,
-    rectangle, rounded corners, inner sep=5pt, inner ysep=10pt]
-\tikzstyle{fancytitle} =[fill=black, text=white, font=\bfseries]
-
-%------------ Random experiment (Lec1) ---------------
-\begin{tikzpicture}
-\node [mybox] (box){%
-    \begin{minipage}{0.3\textwidth}
-    The outcome in a random experiment is \textbf{unpredictable}:
-    \scriptsize
-    \begin{itemize}[topsep=0pt]
-        \setlength\itemsep{-0.5em}
-        \item[-] outcome is too complicates or poorly understood
-        \item[-] outcome is designed to be unpredictable
-        \item[-] coincidences, or independent chains of events
-    \end{itemize}
-    \footnotesize
-    \textbf{Random card shuffle experiment}: take top card from a deck and insert randomly, to complete the shuffle of $n$ cards, we need $T=n+\frac{n}{2}+\cdots +\frac{n}{n-1}+1= n\log n$ shuffles.
-    
-    \textbf{Random number generator}: $x_{n+1}=\frac{ax_n+b}{c}-\left[\frac{ax_n+b}{c}\right]$, the remainder after dividing by $c$, hence $x_{n+1}\in [0,c-1]$, let $u_{n+1}=\frac{x_{n+1}}{c}$, $x_0,a,b,c$ all be integers. For very large $a$ and good choice of $b,c$, the sequence $u_1,u_2,\cdots$ is like a sequence of numbers randomly picked from $[0,1]$
-    \end{minipage}
-};
-%------------ Random experiment (Lec 1) --------------
-\node[fancytitle, right=10pt] at (box.north west) {Random experiments};
-\end{tikzpicture}
-
-%------------Probabilities (Lec 1) ---------------
-\begin{tikzpicture}
-\node [mybox] (box){%
-    \begin{minipage}{0.3\textwidth}
-    Ways of assigning probabilities:
-    \scriptsize
-    \begin{itemize}[topsep=0pt]
-        \setlength\itemsep{-0.5em}
-        \item[-] symmetry: assume all outcomes are equally likely
-        \item[-] experimental method: relative frequency in repeated random experiment
-        \item[-] subjective method: assign probabilities using knowledge of random experiment
-        \item[-] market method
-    \end{itemize}
-    \normalsize
-    Elements of \boxed{\textbf{probability space}}:
-    \begin{enumerate}[noitemsep, topsep=0pt]
-        \item[-] outcome space $\Omega$ and outcomes $\omega \in \Omega$
-        \item[-] event $E$, $E\subset \Omega$
-        \item[-] probability function/measure $P:\mathcal{A}\rightarrow [0,1]$: a function from \textbf{a collection} $\mathcal{A}$ of subsets of $\Omega$ to the interval $[0,1]$.
-    \end{enumerate}
-    \end{minipage}
-};
-%------------ Mixing Header ---------------------
-\node[fancytitle, right=10pt] at (box.north west) {Probabilities};
-\end{tikzpicture}
-
-%------------ Events (Lec 1) ---------------
-\begin{tikzpicture}
-\node [mybox] (box){%
-    \begin{minipage}{0.3\textwidth}
-    Events $E_1,E_2,\cdots$ are just sets. They also follow the algebras of sets, such as:
-    
-    \scriptsize{
-    	\begin{tabular}{ll}
-        $A\cup (B\cap C)=(A\cup B)\cap (A\cup C)$ \\
-        $A\cap (B\cup C)=(A\cap B)\cup (A\cap C)$ \\
-        $A\cup A^C=U$ & $ A\setminus B=A\cap B^C$ \\
-        $(\bigcup_{i=1}^{\infty}A_i)^C=\bigcap_{i=1}^{\infty}A_i^C$ & $(\bigcap_{i=1}^{\infty}A_i)^C=\bigcup_{i=1}^{\infty}A_i^C$ \\
-        $A\cup B=U,A\cap B=\varnothing\Leftrightarrow B=A^C$ &$(A^C)^C=A$ \\
-        \multicolumn{2}{l}{$A\subseteq B\Leftrightarrow A\cap B=A\Leftrightarrow A\cup B=B\Leftrightarrow A\setminus B=\varnothing \Leftrightarrow B^C\subseteq A^C$} 
-        \end{tabular}}
-    \normalsize
-    
-    Two special relations:
-    \begin{enumerate}[noitemsep, topsep=0pt]
-        \item[-] \textbf{disjoint}: $E_1\cap E_2=\varnothing$
-        \item[-] \textbf{partition}: $\bigcup^{\infty}_{i=1}E_i=\Omega$
-    \end{enumerate}
-    \end{minipage}
-};
-%------------ Inner Product Space Header ---------------------
-\node[fancytitle, right=10pt] at (box.north west) {Classes of events};
-\end{tikzpicture}
-
-%------------ sigma field (Lec1) ---------------
-\begin{tikzpicture}
-\node [mybox] (box){%
-    \begin{minipage}{0.3\textwidth}
-    Definition of $\sigma-$field: $\mathcal{A}$ (a collection of subsets of $\Omega$) is a $\sigma-$field if
-    \begin{itemize}[noitemsep, topsep=0pt]
-        \item[(i)] $\varnothing \in \mathcal{A}$
-        \item[(ii)] $E\in \mathcal{A}\Rightarrow E^C\in \mathcal{A}$
-        \item[(iii)] $E_1,E_2,\cdots \in \mathcal{A}\Rightarrow \bigcup^{\infty}_{i=1}E_i\in\mathcal{A}$ ($\bigcap E^C_i \in\mathcal{A}$, $\bigcup E^C_i\in\mathcal{A}$, $\bigcap E_i\in\mathcal{A}$ as well).
-    \end{itemize}
-    
-    Some examples:
-    \begin{itemize}[noitemsep, topsep=0pt]
-        \item[-] Trivial $\sigma-$field:$\mathcal{A}=\{\varnothing,\Omega\}$
-        \item[-] Largest $\sigma-$field: powerset of $\Omega$, $\mathcal{P}(\Omega)$
-    \end{itemize}
-    \end{minipage}
-};
-%------------ sigma field (Lec1) ---------------------
-\node[fancytitle, right=10pt] at (box.north west) {$\sigma-$field and Borel $\sigma-$field};
-\end{tikzpicture}
-
-%------------ Variation of Parameters Content ---------------------
-\begin{tikzpicture}
-\node [mybox] (box){%
-    \begin{minipage}{0.3\textwidth}
-    	\begin{align*}
-        	F(x) &= y'' + y' \\
-            y_h &= b_1y_1(x) + b_2y_2(x), y_1 y_2 \text{ are L.I.} \\
-            y_p &= u_1(x)y_1(x) + u_2(x)y_2(x) \\
-            u_1 &= \int^t -\frac{y_2F(t)dt}{w[y_1,y_2](t)} \\
-            u_2 &= \int^t \frac{y_1F(t)dt}{w[y_1,y_2](t)} \\    		
-            y &= y_h + y_p
-    	\end{align*}
-    	
-    \end{minipage}
-};
-%------------ Variation of Parameters Header ---------------------
-\node[fancytitle, right=10pt] at (box.north west) {Variation of Parameters};
-\end{tikzpicture}
-
-%------------ Systems of ODE Content ---------------
-\begin{tikzpicture}
-\node [mybox] (box){%
-    \begin{minipage}{0.3\textwidth}
-    \small{
-    	\begin{tabular}{lp{4cm} l}
-        $\vec{x}' = A\vec{x}$ \\
-		\textit{A is diagonalizable} & $\vec{x}(t)=a_{1}e^{\lambda_1 t}\vec{v_1}+\cdots+ a_{n}e^{\lambda_n t}\vec{v_n}$ \\ \hline
-        \textit{A is not diagonalizable} & $\vec{x}(t)=a_1e^{\lambda_1 t}\vec{v_1} + a_2e^{\lambda t}(\vec{w} + t\vec{v} )$ \\
-        & where $(A - \lambda I)\vec{w} = \vec{v} $\\
-        & $\vec{v}$ is an Eigenvector w/ value $\lambda$ \\
-        & i.e. $\vec{w}$ is a generalized Eigenvector \\ \hline
-        $\vec{x}' = A\vec{x} + \vec{B}$ &Solve $y_h$ \\
-        & $\vec{x_1} = e^{\lambda_1t}\vec{v_1}, \vec{x_2} = e^{\lambda_2t}\vec{v_2}$ \\ 			& $\vec{X} = [\vec{x_1},\vec{x_2}]$ \\
-        & $\vec{X}\vec{u}'=\vec{B}$ \\
-        & $y_p = \vec{X}\vec{u}$ \\
-        & $y = y_h + y_p$
-	\end{tabular}}
-    \end{minipage}
-};
-%------------ Systems of ODE Header ---------------------
-\node[fancytitle, right=10pt] at (box.north west) {Systems};
-\end{tikzpicture}
-
-%------------ Exponentiation Content ---------------
-\begin{tikzpicture}
-\node [mybox] (box){%
-    \begin{minipage}{0.3\textwidth}
-    \small{
-    	\begin{tabular}{lp{4cm} l}
-        $A^n = SD^nS^{-1}$ \\
-        \textit{D is the diagonalization of A}
-	\end{tabular}}
-    \end{minipage}
-};
-%------------ Spring-Mass Header ---------------------
-\node[fancytitle, right=10pt] at (box.north west) {Matrix Exponentiation};
-\end{tikzpicture}
-
-%------------ Laplace Transforms Content ---------------
-\begin{tikzpicture}
-\node [mybox] (box){%
-    \begin{minipage}{0.3\textwidth}
-    $$L[f](s) = \int_0^{\infty} e^{-sx}f(x)dx $$
-    
-    \small{
-    	\begin{tabular}{lp{4cm} l}
-        $f(t) = t^n, n \geq 0 $ &$F(s) = \frac{n!}{s^{n+1}}, s > 0 $ \\
-        $f(t) = e^{at}, a \textit{ constant}$ & $ F(s) = \frac{1}{s-a}, s > a$ \\
-        $f(t) = \sin{bt}, b \textit{ constant}$ & $ F(s) = \frac{b}{s^2 + b^2}, s > 0$ \\
-        $f(t) = \cos{bt}, b \textit{ constant}$ & $ F(s) = \frac{s}{s^2 + b^2}, s > 0$ \\
-        $f(t) = t^{-1/2}$ & $F(s) = \frac{\pi}{s^{1/2}}, s > 0$ \\
-        $f(t) = \delta(t-a)$ & $F(s) = e^{-as}$ \\
-        $f'$ & $L[f'] = sL[f] - f(0)$ \\
-        $f''$ & $L[f''] = s^2 L[f] - sf(0) - f'(0)$ \\
-        $L[e^{at}f(t)]$ & $L[f](s-a)$ \\
-        $L[u_a(t)f(t-a)]$ & $L[f]e^{-as}$ 
-        \end{tabular}}
-    \end{minipage}
-};
-%------------ Laplace Transforms Header ---------------------
-\node[fancytitle, right=10pt] at (box.north west) {Laplace Transforms};
-\end{tikzpicture}
-%------------ Gaussian Integral Content ---------------------
-\begin{tikzpicture}
-\node [mybox] (box){%
-    \begin{minipage}{0.3\textwidth}
-	$\int_{-\infty}^{+\infty} e^{-1/2(\vec{x}^TA\vec{x})} = \frac{\sqrt{2\pi}^n}{\sqrt{\det A}}$
-	\end{minipage}
-};
-%------------ Gaussian Integral Header ---------------------
-\node[fancytitle, right=10pt] at (box.north west) {Gaussian Integral};
-\end{tikzpicture}
-\\
-\\
-\\
-\\
-
-%------------ Complex Numbers Content ---------------------
-\begin{tikzpicture}
-\node [mybox] (box){%
-    \begin{minipage}{0.3\textwidth}
-    \small{
-        	\begin{tabular}{lp{4cm} l}
-            \textit{Systems of equations} & If $\vec{w_1} = \vec{u(t)} + i\vec{v(t)}$ is a solution, $\vec{x_1} = \vec{u(t)}, \vec{x_2} = \vec{v(t)}$ are solutions \\ 
-            & i.e. $\vec{x_h} = c_1 \vec{x_1} + c_2 \vec{x_2}$ \\
-            \hline
-            \textit{Euler's Identity} &$e^{ix} = \cos x + i \sin x$
-			\end{tabular}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=myblue,
+    filecolor=magenta,      
+    urlcolor=myblue,
+    pdfpagemode=FullScreen,
     }
-	\end{minipage}
-};
-%------------ Gaussian Integral Header ---------------------
-\node[fancytitle, right=10pt] at (box.north west) {Complex Numbers};
-\end{tikzpicture}
 
-%------------ Vector Spaces ---------------
+\urlstyle{same}
+
+\makeatother
+\setlength{\parindent}{0pt}
+
+% material references: Prof. Geert Ridder's lecture notes
+% latex coding references: https://github.com/tim-st/latex-cheatsheet, https://www.overleaf.com/latex/templates/hoja-de-ecuaciones-electricidad-y-magnetismo/xwgjqkrjjgcb
+
+\begin{document}
+\begin{center}{\large{\textbf{Probability and Statistics for Economics Cheat Sheet}}}\\
+Author: Sai Zhang (\href{mailto:saizhang.econ@gmail.com}{email} me or check my \href{https://github.com/SaiChrisZHANG}{Github} page)
+\end{center}
+
+\small
+\begin{multicols*}{5}
+
+% set box styles: in this file, I only use red blue and purple boxes
+%% blue boxes
+\tikzstyle{bluebox} = [draw=myblue, fill=white, thick, rectangle, rounded corners, inner sep=5pt, inner ysep=10pt, text=myblue]
+\tikzstyle{bluetitle} =[fill=myblue, text=white, font=\bfseries]
+\tikzstyle{ibluebox} = [draw=myblue, fill=myblue, thick, rectangle, rounded corners, inner sep=5pt, inner ysep=10pt, text=white]
+\tikzstyle{ibluetitle} =[draw=myblue, fill=white, text=myblue, font=\bfseries]
+%% red boxes
+\tikzstyle{redbox} = [draw=myred, fill=white, thick, rectangle, rounded corners, inner sep=5pt, inner ysep=10pt, text=myred]
+\tikzstyle{redtitle} =[fill=myred, text=white, font=\bfseries]
+\tikzstyle{iredbox} = [draw=myred, fill=myred, thick, rectangle, rounded corners, inner sep=5pt, inner ysep=10pt, text=white]
+\tikzstyle{iredtitle} =[draw=myred, fill=white, text=myred, font=\bfseries]
+%% purple boxes
+\tikzstyle{purplebox} = [draw=mypurple, fill=white, thick, rectangle, rounded corners, inner sep=5pt, inner ysep=10pt, text=mypurple]
+\tikzstyle{purpletitle} =[fill=mypurple, text=white, font=\bfseries]
+\tikzstyle{ipurplebox} = [draw=mypurple, fill=mypurple, thick, rectangle, rounded corners, inner sep=5pt, inner ysep=10pt, text=white]
+\tikzstyle{ipurpletitle} =[draw=mypurple, fill=white, text=mypurple, font=\bfseries]
+%% orange boxes
+\tikzstyle{orangebox} = [draw=myorange, fill=white, thick, rectangle, rounded corners, inner sep=5pt, inner ysep=10pt, text=myorange]
+\tikzstyle{orangetitle} =[fill=myorange, text=white, font=\bfseries]
+\tikzstyle{iorangebox} = [draw=myorange, fill=myorange, thick, rectangle, rounded corners, inner sep=5pt, inner ysep=10pt, text=white]
+\tikzstyle{iorangetitle} =[draw=myorange, fill=white, text=myorange, font=\bfseries]
+
+\section*{Random experiments}
+The outcome in a random experiment is \textbf{unpredictable}:
+\begin{itemize}
+    \item[-] outcome is too complicates or poorly understood
+    \item[-] outcome is designed to be unpredictable
+    \item[-] coincidences, or independent chains of events
+\end{itemize}
+
+\vspace{5pt}
 \begin{tikzpicture}
-\node [mybox] (box){%
-    \begin{minipage}{0.3\textwidth}
-    $v_1, v_2 \in V$\\
-    1. $v_1 + v_2 \in V$ \\
-	2. $k \in \mathbb{F}, kv_1 \in V $ \\
-	3. $ v_1 + v_2 = v_2 + v_1 $ \\
-	4. $(v_1 + v_2) + v_3 = v_1 + (v_2 + v_3) $ \\
-	5. $\forall v \in V, 0 \in V \mid 0 + v_1 = v_1 + 0 = v_1$ \\
-    6. $\forall v \in V, \exists -v \in V \mid v + (-v) = (-v) + v = 0 $ \\
-    7. $\forall v \in V, 1 \in \mathbb{F} \mid 1*v = v$ \\
-    8. $\forall v \in V, k,l \in \mathbb{F}, (kl)v = k (lv)$ \\
-    9. $\forall k \in \mathbb{F}, k(v_1 + v_2) = kv_1 + kv_2$ \\
-    10. $\forall v \in V, k,l \in \mathbb{F}, (k+l)v = kv + lv$
+\node [orangebox] (box){%
+    \begin{minipage}{0.18\textwidth}
+    \footnotesize
+    \textbf{Random card shuffle experiment}: take top card from a deck and insert randomly, to complete the shuffle of $n$ cards, we need $$T=n+\frac{n}{2}+\cdots +\frac{n}{n-1}+1= n\log n$$ shuffles.
+    
+    \textbf{Random number generator}: $$x_{n+1}=\frac{ax_n+b}{c}-\left[\frac{ax_n+b}{c}\right]$$the remainder after dividing by $c$, hence $x_{n+1}\in [0,c-1]$, let $u_{n+1}=\frac{x_{n+1}}{c}$, $x_0,a,b,c$ all be integers. For very large $a$ and good choice of $b,c$, the sequence $u_1,u_2,\cdots$ is like a sequence of numbers randomly picked from $[0,1]$
     \end{minipage}
 };
-%------------ Vector Space Header ---------------------
-\node[fancytitle, right=10pt] at (box.north west) {Vector Spaces};
+\node[orangetitle, right=4pt] at (box.north west) {Two examples};
 \end{tikzpicture}
+
+\section*{Probabilities}
+Probability is a number in $[0,1]$ that measures the likelihood of an outcome or a set of outcomes.
+
+Ways of assigning probabilities:
+\begin{itemize}
+    \item[-] \textbf{symmetry}: assume all outcomes are equally likely
+    \item[-] \textbf{experimental method}: relative frequency in repeated random experiment
+    \item[-] \textbf{subjective method}: assign probabilities using knowledge of random experiment
+    \item[-] \textbf{market method}
+\end{itemize}
+
+\vspace{5pt}
+\begin{tikzpicture}
+\node [bluebox] (box){%
+    \begin{minipage}{0.18\textwidth}
+     \begin{itemize}
+        \item[-] \textbf{outcome space} $\Omega$ and outcomes $\omega \in \Omega$
+        \item[-] \textbf{event} $E$, $E\subset \Omega$
+        \item[-] \textbf{probability function/measure} $P:\mathcal{A}\rightarrow [0,1]$: a function from \textbf{a collection} $\mathcal{A}$ of subsets of $\Omega$ to the interval $\mathbf{[0,1]}$.
+    \end{itemize}
+    \end{minipage}
+};
+\node[bluetitle, right=4pt] at (box.north west) {Elements of probability space};
+\end{tikzpicture}
+
+\section*{Classes of events}
+Events $E_1,E_2,\cdots$ are just sets. They also follow the algebras of sets.
+
+\begin{tikzpicture}
+\node [orangebox] (box){%
+    \begin{minipage}{0.18\textwidth}
+    \footnotesize
+    $A\cup (B\cap C)=(A\cup B)\cap (A\cup C)$
+    
+    $A\cap (B\cup C)=(A\cap B)\cup (A\cap C)$
+    
+    $A\cup A^C=U$, $ A\setminus B=A\cap B^C$
+    
+    $(\bigcup_{i=1}^{\infty}A_i)^C=\bigcap_{i=1}^{\infty}A_i^C$
+    
+    $(\bigcap_{i=1}^{\infty}A_i)^C=\bigcup_{i=1}^{\infty}A_i^C$
+    
+    $A\cup B=U,A\cap B=\varnothing\Leftrightarrow B=A^C$
+    
+    $(A^C)^C=A$
+    
+    $A\subseteq B\Leftrightarrow A\cap B=A\Leftrightarrow A\cup B=B\Leftrightarrow A\setminus B=\varnothing \Leftrightarrow B^C\subseteq A^C$
+    \end{minipage}
+};
+\node[orangetitle, right=4pt] at (box.north west) {Some set algebras};
+\end{tikzpicture}
+
+Two special relations:
+\begin{itemize}
+    \item[-] \textbf{disjoint}: $E_1\cap E_2=\varnothing$
+    \item[-] \textbf{partition}: $\bigcup^{\infty}_{i=1}E_i=\Omega$, $\{E_i\}$ are pairwise disjoint
+\end{itemize}
+
+\section*{$\sigma-$field and Borel $\sigma-$field}
+
+\vspace{5pt}
+\begin{tikzpicture}
+\node [bluebox] (box){%
+    \begin{minipage}{0.18\textwidth}
+     $\mathcal{A}$ (a collection of subsets of $\Omega$) is a $\sigma-$field if:
+\begin{itemize}
+    \item[\textbf{1}] $\varnothing \in \mathcal{A}$
+    \item[\textbf{2}] $E\in \mathcal{A}\Rightarrow E^C\in \mathcal{A}$
+    \item[\textbf{3}] $E_1,E_2,\cdots \in \mathcal{A}\Rightarrow \bigcup^{\infty}_{i=1}E_i\in\mathcal{A}$
+\end{itemize}
+It is easy to see that $\bigcap E^C_i \in\mathcal{A}$, $\bigcup E^C_i\in\mathcal{A}$, $\bigcap E_i\in\mathcal{A}$ as well
+    \end{minipage}
+};
+\node[bluetitle, right=4pt] at (box.north west) {Definition of $\sigma-$field};
+\end{tikzpicture}
+    
+Two important $\sigma-$field:
+\begin{itemize}
+    \item[-] Trivial $\sigma-$field:$\mathcal{A}=\{\varnothing,\Omega\}$
+    \item[-] Largest $\sigma-$field: \textbf{powerset} of $\Omega$, $\mathcal{P}(\Omega)$
+\end{itemize}
+
 \end{multicols*}
+
 \end{document}
-
-
-Contact GitHub API Training Shop Blog About
-© 2016 GitHub, Inc. Terms Privacy Security Status Help
