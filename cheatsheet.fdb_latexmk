@@ -1,7 +1,7 @@
 # Fdb version 3
-["pdflatex"] 1633485368 "/Users/admin/Desktop/LearningNotes/fun-Econ-Prob-Stat/cheatsheet.tex" "/Users/admin/Desktop/LearningNotes/fun-Econ-Prob-Stat/cheatsheet.pdf" "cheatsheet" 1633485372
-  "/Users/admin/Desktop/LearningNotes/fun-Econ-Prob-Stat/cheatsheet.aux" 1633485372 739 0b3136069a2d679661a68b95065872c4 ""
-  "/Users/admin/Desktop/LearningNotes/fun-Econ-Prob-Stat/cheatsheet.tex" 1633485368 31251 7fd19edc658e4cfdb0de8fb4220489bc ""
+["pdflatex"] 1633485845 "/Users/admin/Desktop/LearningNotes/fun-Econ-Prob-Stat/cheatsheet.tex" "/Users/admin/Desktop/LearningNotes/fun-Econ-Prob-Stat/cheatsheet.pdf" "cheatsheet" 1633485848
+  "/Users/admin/Desktop/LearningNotes/fun-Econ-Prob-Stat/cheatsheet.aux" 1633485848 739 0b3136069a2d679661a68b95065872c4 ""
+  "/Users/admin/Desktop/LearningNotes/fun-Econ-Prob-Stat/cheatsheet.tex" 1633485842 31273 9ff25b686f467ee5e1e4434a1c3f8421 ""
   "/usr/local/texlive/2018/texmf-dist/fonts/enc/dvips/base/8r.enc" 1480098666 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/local/texlive/2018/texmf-dist/fonts/enc/dvips/kpfonts/kpfonts-expert.enc" 1480098667 2639 b7bbeb66c016cde6fdcad9263fe54a4a ""
   "/usr/local/texlive/2018/texmf-dist/fonts/map/fontname/texfonts.map" 1511824771 3332 103109f5612ad95229751940c61aada0 ""
@@ -235,13 +235,13 @@
   "/usr/local/texlive/2018/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1523934492 2717033 f61a5287d9c22a39a74f1979fe3f905c ""
   "/usr/local/texlive/2018/texmf-var/web2c/pdftex/pdflatex.fmt" 1546876434 4220279 03775d5b636d111d69743b04dcd76273 ""
   "/usr/local/texlive/2018/texmf.cnf" 1523934483 577 0b39adfd7c93507ff20c9c14c2f1a33f ""
-  "cheatsheet.aux" 1633485372 739 0b3136069a2d679661a68b95065872c4 ""
-  "cheatsheet.out" 1633485371 0 d41d8cd98f00b204e9800998ecf8427e ""
-  "cheatsheet.tex" 1633485368 31251 7fd19edc658e4cfdb0de8fb4220489bc ""
+  "cheatsheet.aux" 1633485848 739 0b3136069a2d679661a68b95065872c4 ""
+  "cheatsheet.out" 1633485847 0 d41d8cd98f00b204e9800998ecf8427e ""
+  "cheatsheet.tex" 1633485842 31273 9ff25b686f467ee5e1e4434a1c3f8421 ""
   (generated)
-  "/Users/admin/Desktop/LearningNotes/fun-Econ-Prob-Stat/cheatsheet.log"
-  "cheatsheet.log"
   "cheatsheet.pdf"
   "cheatsheet.out"
-  "cheatsheet.aux"
+  "/Users/admin/Desktop/LearningNotes/fun-Econ-Prob-Stat/cheatsheet.log"
+  "cheatsheet.log"
   "/Users/admin/Desktop/LearningNotes/fun-Econ-Prob-Stat/cheatsheet.pdf"
+  "cheatsheet.aux"
