@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2019.1.7)  6 OCT 2021 19:16
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2019.1.7)  6 OCT 2021 19:17
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1815,14 +1815,14 @@ File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 * layoutoffset:(h,v)=(0.0pt,0.0pt)
 * modes: landscape 
 * h-part:(L,W,R)=(5.69054pt, 836.51105pt, 2.84526pt)
-* v-part:(T,H,B)=(5.69054pt, 586.1268pt, 5.69054pt)
+* v-part:(T,H,B)=(2.84526pt, 588.97208pt, 5.69054pt)
 * \paperwidth=845.04684pt
 * \paperheight=597.50787pt
 * \textwidth=836.51105pt
-* \textheight=586.1268pt
+* \textheight=588.97208pt
 * \oddsidemargin=-66.57945pt
 * \evensidemargin=-66.57945pt
-* \topmargin=-103.57945pt
+* \topmargin=-106.42473pt
 * \headheight=12.0pt
 * \headsep=25.0pt
 * \topskip=10.0pt
@@ -1997,13 +1997,13 @@ Overfull \hbox (2.06364pt too wide) in paragraph at lines 540--541
  []
 
 Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 543.
+(babel)             in language  on input line 557.
 Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 543.
+(babel)             in language  on input line 557.
 Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 543.
+(babel)             in language  on input line 557.
 Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 543.
+(babel)             in language  on input line 557.
 [1
 
 {/usr/local/texlive/2018/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
@@ -2234,13 +2234,13 @@ Package rerunfilecheck Info: File `cheatsheet.out' has not changed.
 Here is how much of TeX's memory you used:
  34748 strings out of 492649
  691182 string characters out of 6129623
- 862092 words of memory out of 5000000
+ 862096 words of memory out of 5000000
  37697 multiletter control sequences out of 15000+600000
  663416 words of font info for 355 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  55i,16n,67p,10475b,955s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2018/texmf-dist/fonts/enc/dvips/base/8r.enc}{/usr/local/texlive/2018/texmf-dist/fonts/enc/dvips/kpfonts/kpfonts-expert.enc}</usr/local/texlive/2018/texmf-dist/fonts/type1/public/esint-type1/esint10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/kpfonts/jkpbn8a.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/kpfonts/jkpbne.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/kpfonts/jkpex.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/kpfonts/jkpmi.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/kpfonts/jkpmia.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/kpfonts/jkpmit8a.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/kpfonts/jkpmn8a.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/kpfonts/jkpmne.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/kpfonts/jkpsy.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/kpfonts/jkpsyc.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm7.pfb>
-Output written on /Users/admin/Desktop/LearningNotes/fun-Econ-Prob-Stat/cheatsheet.pdf (3 pages, 146936 bytes).
+Output written on /Users/admin/Desktop/LearningNotes/fun-Econ-Prob-Stat/cheatsheet.pdf (3 pages, 147004 bytes).
 PDF statistics:
  102 PDF objects out of 1000 (max. 8388607)
  83 compressed objects within 1 object stream
