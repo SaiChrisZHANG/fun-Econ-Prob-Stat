@@ -709,6 +709,437 @@ Why are they important: each non-negative borel measurable function can be appro
 \node[ibluetitle, right=4pt] at (box.north west) {Theorem of simple functions};
 \end{tikzpicture}
 
+\vspace{2pt}
+\begin{tikzpicture}
+\node [redbox] (box){%
+    \color{myred}
+    \begin{minipage}{0.18\textwidth}
+    \textbf{Step 1: increasing}
+    
+    Let $\sum^{4^n}_{i=1}I_{X\geq \frac{i}{2^n}}(\omega)=C$ then it is easy to show that $\sum^{4^{n+1}}_{i=1}I_{X\geq \frac{i}{2^{n+1}}}(\omega)\geq 2C$, hence $X_n=\frac{C}{2^n}$, $X_{n+1}\geq\frac{2C}{2^{n+1}}=X_n$
+    
+    \textbf{Step 2: approximation}
+    There are two scenarios:
+\begin{itemize}
+    \item[(a)] $X(\omega)=\infty$. It will give $X_n(\omega)=2^{-n}\sum^{4^n}_{i=1}I_{X\geq \frac{i}{2^n}}(\omega)=2^n$, hence $\lim_{n\rightarrow\infty}X_n(\omega)=\infty=X$
+    \item[(b)] $X(\omega)<\infty$. For sufficiently large $n$, we can find a $k\in\left\{0,1,\cdots,4^n-1\right\}$ such that $k2^{-n}\leq X <(k+1)2^{-n}$, and $X_n=k2^{-n}$. Hence $\mid X-X_n\mid\leq 2^{-n}\rightarrow0\Rightarrow X_n\rightarrow X$
+\end{itemize}
+\end{minipage}
+};
+\node[redtitle, right=4pt] at (box.north west) {Proof of $I_A(\omega)$ approximation};
+\end{tikzpicture}
+
+\section*{Expectation and integration}
+Start from the simple case: $X(\omega)=\sum^n_{i=1}\alpha_i I_{A_i}(\omega)\Rightarrow E(X)=\sum^n_{i=1}\alpha_i P(A_i)\Rightarrow E(X)=\int_{\Omega}X(\omega)\mathrm{d}P(\omega)=\int X\mathrm{d}P$.
+
+For general random variables, we take advantage of the \textbf{increasing sequences of simple function $X_n$ that asymptotically approaches} $X$.
+
+\vspace{2pt}
+\begin{tikzpicture}
+\node [bluebox] (box){%
+    \begin{minipage}{0.18\textwidth}
+    \color{myblue}
+    \footnotesize
+    For simple functions $X_s$, $$E(X)=\int X\mathrm{d}P=\sup_{X_s}\left\{E(X_s)\mid X\geq X_s \right\}$$
+    \end{minipage}
+};
+\node[bluetitle, right=4pt] at (box.north west) {Def. of $E(X)$: non-negative $X$};
+\end{tikzpicture}
+
+\vspace{2pt}
+\begin{tikzpicture}
+\node [orangebox] (box){%
+    \begin{minipage}{0.18\textwidth}
+    \color{myorange}
+    \footnotesize
+    \begin{itemize}
+        \item[-] $\forall A\in\mathcal{A}, E(I_A)=P(A)$
+        \item[-] $E(\mathbf{0}=0)$, where $\mathbf{0}$ is the null function that assigns 0 to all $\omega \in\Omega$
+        \item[-] \textbf{linearity}: $\forall \alpha,\beta\geq 0$ and nonnegative Borel measurable functions $X,Y$ $$E(\alpha X+\beta Y)=\alpha E(X)+\beta E(Y)$$
+        \item[-] If $\forall \omega\in\Omega, X(\omega)\leq Y(\omega)$, $E(Y)=E(X)+E(Y-X)\geq E(X)$
+    \end{itemize}
+    \end{minipage}
+};
+\node[orangetitle, right=4pt] at (box.north west) {Properties of $E(X)$};
+\end{tikzpicture}
+
+For \textbf{arbitrary} random variable $X$, we can write $X(\omega)=X_+(\omega)-X_-(\omega)$ with $X_+(\omega)=\max\left\{X(\omega),0\right\}$ and $X_-(\omega)=-\min\left\{X(\omega),0 \right\}$. Now $X_+$ and $X_-$ are both \textbf{non-negative}, and:
+
+\vspace{2pt}
+\begin{tikzpicture}
+\node [bluebox] (box){%
+    \begin{minipage}{0.18\textwidth}
+    \color{myblue}
+    \footnotesize
+    For random variable $X=X_+-X_-$,  $$E(X)=E(X_+)-E(X_-)=\int_{\Omega}X_+\mathrm{d}P-\int_{\Omega}X_-\mathrm{d}P$$
+    For $E(X)$ to be well-defined, we need $E(\mid X\mid)<\infty$, i.e., $X$ is \textbf{integrable}.
+    \end{minipage}
+};
+\node[bluetitle, right=4pt] at (box.north west) {Def. of $E(X)$: arbitrary $X$};
+\end{tikzpicture}
+
+By introducing Jensen's inequality: $\forall \lambda\in(0,1)$, and a convex $f$:
+$$f(\lambda x_1+(1-\lambda)x_2)\leq\lambda f(x_1)+(1-\lambda)f(x_2)$$
+we have the following properties for a convex function $f$:
+
+\vspace{2pt}
+\begin{tikzpicture}
+\node [orangebox] (box){%
+    \begin{minipage}{0.18\textwidth}
+    \color{myorange}
+    \footnotesize
+    For a convex $f:\mathbb{R}\rightarrow\mathbb{R}$, we have:
+    \begin{itemize}
+        \item[-] $f$ is \textbf{Borel measurable}: let $E=\left\{x\mid f(x)\in (-\infty,t] \right\}$, since $f$ is convex, $\forall x_1,x_2\in E,f(\lambda x_1+(1-\lambda)x_2)\leq \lambda f(x_1)+(1-\lambda)f(x_2)\leq t$. Hence, $E$ is an interval on $\mathbb{R}$, $f$ is Borel measurable.
+        \item[-] $\forall x,x_0,f(x)\geq f(x_0)+\alpha(x-x_0)$ where $\alpha$ is a constant (may depend on $x_0$).
+    \end{itemize}
+    And, derive \textbf{two features of} $E(f(x))$:
+    \begin{itemize}
+        \item[-] $E(f(X)_-)<\infty$ if $E(\mid X\mid)<\infty$: we know $f(x)\geq f(x_0)+\alpha(x-x_0)\geq -|f(x_0)|-|\alpha|(|x|+|x_0|)$, hence $E(|X|)<\infty \Rightarrow E(f(X)_-) <E(|X|) <\infty$
+        \item[-] Take $x_0=E(X)$ get $E(f(X))>f(E(X))+\alpha(E(X)-E(X))\Rightarrow E(f(X))\geq f(E(X))$
+    \end{itemize}
+    
+    \end{minipage}
+};
+\node[orangetitle, right=4pt] at (box.north west) {$E(f(x))$ for a convex $f$};
+\end{tikzpicture}
+
+\subsection*{Lebesgue integrals}
+In $E(X)=\int X\mathrm{d}P$, $P$ assigns probability 1 to $\Omega$. \textbf{Lebesgue measure} assigns probability 0 to $\varnothing$.
+
+Lebesgue measure ($\Omega=\mathbb{R}$) is defined as $m([a,b])=b-a$ and Lebesgue measure of a point is 0. Hence $m((a,b))=b-a$. Open intervals $(a,b)$ are a generating class, $m$ can be uniquely extended to all sets in the Borel $\sigma-$field $\mathcal{B}$.
+
+\textbf{Lebesgue integral} is then $\int^{\infty}_{-\infty}f(x)\mathrm{d}x$ (NOT $\int_{\mathbb{R}}f\mathrm{d}m$).
+
+\vspace{2pt}
+\begin{tikzpicture}
+\node [bluebox] (box){%
+    \begin{minipage}{0.18\textwidth}
+    \color{myblue}
+    \footnotesize
+    The relation between Lebesgue integral and Riemann integral:
+    \begin{itemize}
+        \item[-] Same notation: $\int^{\infty}_{\infty}f(x)\mathrm{d}x$ 
+        \item[-] If $f$ is integrable ($\int^{\infty}_{-\infty}|f(x)|\mathrm{d}x<\infty$), and Riemann integral exists, the two are the same.
+        \item[-] If $\int^{\infty}_{-\infty}f(x)_+\mathrm{d}x=\int^{\infty}_{-\infty}f(x)_-\mathrm{d}x=\infty$, Lebesgue integral is NOT defined, but Riemann integral $\lim_{t\rightarrow\infty}\int^t_{-t}f(x)\mathrm{d}x$ may exist.
+    \end{itemize}
+    
+    \end{minipage}
+};
+\node[bluetitle, right=4pt] at (box.north west) {Lebesgue and Riemann integral};
+\end{tikzpicture}
+
+The last group of properties of expectations regards convergence:
+
+\vspace{2pt}
+\begin{tikzpicture}
+\node [ibluebox] (box){%
+    \begin{minipage}{0.18\textwidth}
+    \color{white}
+    \footnotesize
+    Three properties are especially important:
+    \begin{itemize}
+        \item[(1)] \textbf{Monotone convergence}: if $X_n$ is an \textbf{increasing sequence of non-negative} random variables, i.e. $0\leq X_1\leq X_2\leq\cdots\leq X_n$, then 
+        $$\lim_{n\rightarrow\infty}X_n=X\Rightarrow \lim_{n\rightarrow\infty}E(X_n)=E(X)$$
+        \item[(2)] \textbf{Fatou's Lemma}: for $X_1,\cdots,X_n\geq 0$,
+        $$E({\lim\inf}_{n\rightarrow\infty}X_n)\leq {\lim\inf}_{n\rightarrow\infty}E(X_n)$$
+        \item[(3)] \textbf{Dominated convergence}: if $X_1,\cdots,X_n$ are integrable ($E(|X_i|)<\infty$), and there is a \textbf{non-negative, integrable} random variable $Y$ s.t. $|X_i(\omega)|\leq Y(\omega),\forall \omega\in\Omega,\forall i=1,\cdots,n$, then
+        $$\lim_{n\rightarrow\infty}X_n=X\Rightarrow \lim_{n\rightarrow\infty}E(X_n)=E(X)$$
+    \end{itemize}
+    \end{minipage}
+};
+\node[ibluetitle, right=4pt] at (box.north west) {Convergence properties of $E(X)$};
+\end{tikzpicture}
+
+(1) is used to prove (2), (2) is used to prove (3):
+
+\vspace{2pt}
+\begin{tikzpicture}
+\node [redbox] (box){%
+    \begin{minipage}{0.18\textwidth}
+    \color{myred}
+    \footnotesize
+    \textbf{Monotone convergence}:
+    
+    \textbf{Fatou's Lemma}:
+    
+    \textbf{Dominated convergence}:
+    \end{minipage}
+};
+\node[redtitle, right=4pt] at (box.north west) {Proof of $\rightarrow$ properties of $E(X)$};
+\end{tikzpicture}
+
+\subsection*{Sets of measure 0}
+For integrals/expectations, the zero probability events $\left\{E\in\mathcal{A}\mid P(E)=0\right\}$ can be neglected. This gives:
+
+\vspace{2pt}
+\begin{tikzpicture}
+\node [bluebox] (box){%
+    \begin{minipage}{0.18\textwidth}
+    \color{myblue}
+    If random variables $X$ and $Y$ satisfy that for event $E=\left\{\omega\mid X(\omega)\neq Y(\omega)\right\}$, $P(E)=0$, then $E(X)=E(Y)$.
+    \end{minipage}
+};
+\node[bluetitle, right=4pt] at (box.north west) {Expectation equality $E(X)=E(Y)$};
+\end{tikzpicture}
+
+This is very easy to prove:
+
+\vspace{2pt}
+\begin{tikzpicture}
+\node [redbox] (box){%
+    \begin{minipage}{0.18\textwidth}
+    \color{myred}
+    We have
+    \begin{align*}
+        E(X)=&E(X\cdot I_{X=Y})+E(X\cdot I_{X\neq Y})\\
+        E(Y)=&E(Y\cdot I_{Y=X})+E(Y\cdot I_{Y\neq X})
+    \end{align*}
+    $E(X\cdot I_{X\neq Y}=E(Y\cdot I_{Y\neq X}=0$, because it is an integral over $E$ and $P(E)=0$.
+    \end{minipage}
+};
+\node[redtitle, right=4pt] at (box.north west) {Proof of $E(X)=E(Y)$};
+\end{tikzpicture}
+
+\section*{Distribution of random variables}
+For a random variable $X:\Omega \rightarrow \mathbb{R}$, we can replace $(\Omega,\mathcal{A},P)$ by $(\mathbb{R},\mathcal{B},P_X)$, get:
+
+\vspace{2pt}
+\begin{tikzpicture}
+\node [bluebox] (box){%
+    \begin{minipage}{0.18\textwidth}
+    \color{myblue}
+    The \textbf{distribution} of $X$ is the measure $P_X:\mathcal{B}\rightarrow \mathbb{R}$, defined by $$P_X(B)=P(X^{-1}(B))=\Pr(X\in B)$$
+    
+    The \textbf{joint distribution} of a vector of random variables $X=(X_1,\cdots,X_N)^T$ is defined as
+    $$P_X(C)=P(X^{-1}(C)) =\Pr(X\in C) $$
+    where $C\in \mathcal{B}^N$, $\mathcal{B}^N$ is the Borel $\sigma-$field in $\mathbb{R}^N$, generated by the sets $B_1\times\cdots\times B_N=\left\{(x_1,\cdots,x_N)\mid x_i\in B_i,B_i\in \mathcal{B} \right\}$
+    \end{minipage}
+};
+\node[bluetitle, right=4pt] at (box.north west) {Distribution of $X$};
+\end{tikzpicture}
+
+\subsection*{Distribution function}
+For the probability space of random variable $X$: $(\mathbb{R},\mathcal{B},P_X)$, $P_X$ is determined by assigning probabilities to $\mathcal{B}$'s generating class $\mathcal{E}-\left\{\left(-\infty,x\right]\mid x\in\mathbb{R}\right\}$, hence
+
+\vspace{2pt}
+\begin{tikzpicture}
+\node [bluebox] (box){%
+    \begin{minipage}{0.18\textwidth}
+    \color{myblue}
+    The \textbf{distribution function} $F_X$ of $X$ is defined as $$F_X(x)=P_X\left(\left(-\infty,x\right]\right)$$
+    This is just the CDF. $F_X:\mathbb{R}\rightarrow[0,1]$ and uniquely determines $P_X$. We can also write it as $F_X(x)=E\left(I_{X\leq x}\right)$.
+    \end{minipage}
+};
+\node[bluetitle, right=4pt] at (box.north west) {Distribution function $F_X(x)$};
+\end{tikzpicture}
+
+\vspace{2pt}
+\begin{tikzpicture}
+\node [orangebox] (box){%
+    \begin{minipage}{0.18\textwidth}
+    \color{myorange}
+    $F_X$ has the following properties:
+    \begin{itemize}
+        \item[(a)] \textbf{Non-decreasing}: $$x\geq y\Rightarrow F_X(x)\geq F_X(y)$$
+        \textbf{Proof}: $x\geq y\Rightarrow (-\infty,y]\subseteq (-\infty,x]\Rightarrow F_X(y)=P_X((-\infty,y])\leq F_X(x)=P_X((\infty,x])$
+        \item[(b)] \textbf{Continuous from the right}: $$ \lim_{y\rightarrow x+}F_X(y)=F_X(x)$$
+        \textbf{Proof}: $F_X\left(x+1/n\right)=E\left( I_{X\leq x+1/n}\right)$. $I_{X\leq x+1/n}\leq 1$, $\lim_{n\rightarrow \infty}I_{x\leq x+1/n}=I_{x\leq x}$, by dominance convergence, $\lim_{n\rightarrow\infty}F_X\left(x+1/n\right)= F_X(x)$. Same logic gives $\Pr(X<x)=\lim_{y\rightarrow x-}F_X(y)=F_X(x-)$.
+    \item[(c)] If $\Pr(X=\infty)=\Pr(X=-\infty)=0$ then, $\lim_{x\rightarrow-\infty}F_X(x)=0$,$\lim_{x\rightarrow \infty}F_X(x)=1$.
+    
+    \textbf{Proof}: use $\lim_{n\rightarrow\infty}I_{X\leq-n}=0$.
+    \end{itemize}
+    \end{minipage}
+};
+\node[orangetitle, right=4pt] at (box.north west) {Properties of $F_X$};
+\end{tikzpicture}
+The properties give some facts about the continuity of $F_X$ and probability of points:
+\begin{itemize}
+    \item[-] $F_X$ is always right continuous, but \textbf{not always continuous}.
+    \item[-] Since $I_{X=x}=\lim_{n\rightarrow\infty}I_{x-1/n<X\leq x}$, we have $\Pr(X=x)=\lim_{n\rightarrow\infty}\left(F_X(x)-F_X(x-1/n\right))=F_X(x)-F_X(x-)$.
+    \item[-] If $\Pr(X=x)>0$, $F_X$ is \textbf{discontinuous} in $x$, the jump at $x$ is $\Pr(X=x)$.
+\end{itemize}
+
+\section*{Function of random variable}
+With a Borel measurable function $f:\mathbb{R}\rightarrow\mathbb{R}$, $Y=f\circ X:\Omega \rightarrow \mathbb{R}$ is a random variable, i.e., Borel measurable.
+
+\vspace{2pt}
+\begin{tikzpicture}
+\node [bluebox] (box){%
+    \begin{minipage}{0.18\textwidth}
+    \color{myblue}
+    $Y:\mathbb{R}\rightarrow \mathbb{R}$ is defined on $(\mathbb{R},\mathcal{B},P_X$, hence:
+    \begin{align*}
+        \Pr(Y\in B) & =P_X(\{x|f(x)\in B\})\\
+        & =P(\{\omega|f(X(\omega))\in B\})
+    \end{align*}
+    
+    and $Y$ is a simple function on $\mathbb{R}$ and $\Omega$:
+    $$Y=\sum^n_{i=1}\alpha_i I_{B_i}(x)=\sum^n_{i=1}\alpha_i I_{X^{-1}(B_i)}(\omega)$$
+    where $\left\{B_i\right\}$ is partition of $\mathbb{R}$, $\left\{X^{-1}(B_i)\right\}$ is hence a partition of $\Omega$.
+    \end{minipage}
+};
+\node[bluetitle, right=4pt] at (box.north west) {distribution of $Y=f\circ X$};
+\end{tikzpicture}
+
+\vspace{2pt}
+\begin{tikzpicture}
+\node [bluebox] (box){%
+    \begin{minipage}{0.18\textwidth}
+    \color{myblue}
+    The expectation of $Y=f\circ X$ is
+    \begin{align*}
+        E(Y) &= \int_{\mathbb{R}}f(x)\mathrm{d}P_X(x)=\sum^n_{i=1}\alpha_i P_X(B_i)\\
+        &=\sum^n_{i=1}\alpha_i P(X^{-1}(B_i))\\
+        &=\int_{\Omega}f(X(\omega))\mathrm{d}P(\omega)=E\left(f(X)\right)
+    \end{align*}
+    
+    It is in general true that: integral of $f$ on $(\mathbb{R},\mathcal{B},P_X)$ is equal to integral of $f(X)$ on $(\Omega,\mathcal{A},P)$.
+    
+    Since $F_X(x)$ and $P_X(x)$ both determine the distribution of $X$, $\int_{\mathbb{R}}f(x)dP_X=\int_{\mathbb{R}}f(x)dF_X$.
+    \end{minipage}
+};
+\node[bluetitle, right=4pt] at (box.north west) {expectation of $Y=f\circ X$};
+\end{tikzpicture}
+
+\subsection*{Absolute continuity of $P$}
+The goal: to calculate probability by \textbf{summation} $P=\sum_iI_A(x_i)f(x_i)$ or \textbf{integration} $P=\int I_A(x)f(x)dx$.
+
+We start by finding a measure $\mu$ for $P$, $\mu$ and $P$ are both defined on $(\Omega,\mathcal{A})$, and $\mu$ is easier to compute.
+
+\vspace{2pt}
+\begin{tikzpicture}
+\node [bluebox] (box){%
+    \begin{minipage}{0.18\textwidth}
+    \color{myblue}
+    \begin{itemize}
+        \item[\textbf{1}] $\forall E \in \mathcal{A},\mu(E)\geq 0$
+        \item[\textbf{2}] $\mu(\varnothing)=0$ (instead of $P(\Omega)=1$)
+        \item[\textbf{3}] If $E_1,E_2,\cdots$ are pairwise disjoint (and countable), $\mu\left(\bigcup^{\infty}_{i=1}E_i\right)=\sum^{\infty}_{i=1}\mu(E_i)$
+        \item[\textbf{*}] $\mu$ is \textbf{$\sigma-$finite}: $\exists \{A_i\}^\infty$, a countable partition of $\Omega$, with $\mu(A_i)<\infty$. \textbf{Probability measure $P$ is always $\sigma-$finite} since $P(\Omega)=1$
+    \end{itemize}
+    \end{minipage}
+};
+\node[bluetitle, right=4pt] at (box.north west) {Requirement of $\mu$};
+\end{tikzpicture}
+
+The most important condition of this \textit{transfer} of measure is \textbf{absolutely continuous}:
+
+\vspace{2pt}
+\begin{tikzpicture}
+\node [ibluebox] (box){%
+    \begin{minipage}{0.18\textwidth}
+    \color{white}
+    For $P,\mu$ defined on $\mathcal{A}$, $P$ is \textbf{absolutely continuous} w.r.t. $\mu$ if $$\mu(A)=0\Rightarrow P(A)=0$$
+    
+    $\mu$ is the dominating measure, $P\ll \mu$
+    \end{minipage}
+};
+\node[ibluetitle, right=4pt] at (box.north west) {$P$ is absolutely continuous};
+\end{tikzpicture}
+
+Now, we want to show $P\ll \mu\Rightarrow\int I_A\mathrm{d}P=\int I_Af(\omega)d\mu$, where $f$ is the density of $P$ w.r.t. $\mu$. We need the following theorem:
+
+\vspace{2pt}
+\begin{tikzpicture}
+\node [ibluebox] (box){%
+    \begin{minipage}{0.18\textwidth}
+    \color{white}
+    For probability measure $P$ and measure $\mu$ defined both on $(\Omega, \mathcal{A})$, $\exists N$ with $\mu(N)=0$ and a \textbf{non-negative Borel measurable} $f:\Omega\rightarrow \mathbb{R}$, s.t. for \textbf{non-negative Borel measurable} $g:\Omega\rightarrow\mathbb{R}$, we have:
+    \begin{align*}
+    \int_{\Omega}g(\omega)\mathrm{d}P(\omega) = & \int_{\Omega}\underset{=0 \textit{ if }P\ll\mu}{\underline{g(\omega)I_N(\omega)\mathrm{d}P(\omega)}}\\
+    & +\int_{\omega}g(\omega)f(\omega)\mathrm{d}\mu(\omega)
+    \end{align*}
+    
+    And for any other $\tilde{N}$ and $\tilde{f}$ also satisfy this, they must be the \textit{same} w.r.t. $P$ and $\mu$:
+    \begin{align*}
+        P(N\setminus\tilde{N})  =P(\tilde{N}\setminus N)&=0\\
+        \mu(N\setminus\tilde{N})  =\mu(\tilde{N}\setminus N)&=0\\
+        P(\{x\mid f(x)\neq \tilde{f}(x)\}) = &\\ \mu(\{x\mid f(x)\neq \tilde{f}(x)\}) & =0
+    \end{align*}
+    \end{minipage}
+};
+\node[ibluetitle, right=4pt] at (box.north west) {Theorem: measure change $P$ to $\mu$};
+\end{tikzpicture}
+
+The idea is to split up the integral into two regions: $N$ and $N^C$. \textbf{Absolute continuity} gives the integral on $N$ is 0, \textbf{the theorem} gives that the integral on $N^C$ w.r.t. $P$ can be changed into an integral w.r.t. $\mu$ with the density $f$.
+
+Two important target measures are \textbf{counting measure} and \textbf{Lebesgue measure}. They are both defined on Borel $\sigma-$field $\mathcal{B}$, hence the outcome space must be $\mathbb{R}$.
+
+\vspace{2pt}
+\begin{tikzpicture}
+\node [iorangebox] (box){%
+    \begin{minipage}{0.18\textwidth}
+    \color{white}
+    For a probability $P_X$ on the space $(\mathbb{R},\mathcal{B},P_X)$, two most common dominating measures are:
+    \begin{itemize}
+        \item[-] \textbf{Lebesgue measure} $m$ for \textbf{continuous} $X$: for $P_X$ that assigns probability 0 to countable sets of \textbf{points} in $\mathbb{R}$. 
+        \item[-] \textbf{counting measure} $\nu$ for \textbf{discrete} $X$: for $P_X$ that assigns probability 0 to sets in $\mathcal{B}$ that \textbf{do NOT contain any of the outcomes of the countable image of $X$}. 
+        
+        If the image of $X$ is the integers $\mathcal{I}$, the for $P_X$ assigning probability 0 to sets in $\mathcal{R}$ that do NOT containing integers, $\nu(B)=\#B\cap\mathcal{I}$ can be used.
+        
+        \item[-] \textbf{Mixed measure} $m+\nu$ for mixed \textbf{discrete-continuous} $X$: image of $X$ is the union of an interval and a countable set, $P_X(B)=0$ when $B$ is neither an interval nor the target countable set (integers, etc.).
+    \end{itemize}
+    \end{minipage}
+};
+\node[iorangetitle, right=4pt] at (box.north west) {Two dominating measures: $m$ and $\nu$};
+\end{tikzpicture}
+
+With dominating measures defined, we have the integrals as
+
+\vspace{2pt}
+\begin{tikzpicture}
+\node [bluebox] (box){%
+    \begin{minipage}{0.18\textwidth}
+    \color{myblue}
+    For the three cases, we have:
+    \begin{itemize}
+        \item[(a)] $P_X\ll m$: $$P_X(B)=\int_{\mathbb{R}}I_B(x)f_X(x)\mathrm{d}x$$
+        \item[(b)] $P_X\ll \nu$:
+        \begin{align*}
+            P_X(B) &=\int_{\mathbb{R}}I_B(x)f_X(x)\mathrm{d}\nu(x)\\
+            &=\sum_{B\cap\mathcal{I}}f_X(i)=\sum_{B\cap\mathcal{I}}P_X(\{i\})\\
+            & =\sum_{B\cap\mathcal{I}}\Pr(X=i)
+        \end{align*}
+        \item[(c)] $P_X\ll m+\nu$:
+        \begin{align*}
+            P_X(B)=&\int_{\mathbb{R}}I_B(x)f_X(x)\mathrm{d}(m+\nu)\\
+            =&\int_{\mathbb{R}}I_B(x)f_X(x)\mathrm{d}x \\
+            &+\int_{\mathbb{R}}I_B(x)f_X(x)\mathrm{d}\nu
+        \end{align*}
+    \end{itemize}
+    Where $f_X(x)=\Pr(X=x)$
+    \end{minipage}
+};
+\node[bluetitle, right=4pt] at (box.north west) {For $P_X=\int I_B(x)\mathrm{d}P(x)$};
+\end{tikzpicture}
+
+For the density function $f_X(x):\mathbb{R}\rightarrow\mathbb{R}$ defined on $(\mathbb{R},\mathcal{B})$, it is actually a \textbf{Borel measurable random variable}.
+
+\vspace{2pt}
+\begin{tikzpicture}
+\node [orangebox] (box){%
+    \begin{minipage}{0.18\textwidth}
+    \color{myorange}
+    density function $f_X(x)$ has the following properties:
+    \begin{itemize}
+        \item[-] non-negative: $\forall x\in\mathbb{R},f_X(x)\geq 0$
+        \item[-] integrate to 1
+        If $X$ is continuous: $$1=P_X\left((-\infty,\infty)\right)=\int_{\mathbb{R}}f_X(x)\mathrm{d}x$$
+        
+        If $X$ is discrete:
+            \begin{align*}
+                1=&P_X\left((-\infty,\infty)\right)=\int_{\mathbb{R}}f_X(x)\mathrm{d}\nu\\
+                =&\sum^{\infty}_{i=-\infty}f_X(i)=1
+            \end{align*}
+    \end{itemize}
+    \end{minipage}
+};
+\node[orangetitle, right=4pt] at (box.north west) {Properties of $f_X(x)$};
+\end{tikzpicture}
+
+How can we find $f_X(x)=\Pr(X)=x$?
+
 \end{multicols*}
 
 \end{document}
